@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
+import { useEffect, useState } from "react";
 
 function App() {
+const [advice, setadvice] = useState("Sometimes it's best to ignore other people's advice.")
+  useEffect(() => {
+    fetchAdvice();
+  }, [])
+  
+  const fetchAdvice = ()=>{
+    const adviceResult = axios.get("https://api.adviceslip.com/advice")
+      .then((response)=>{
+        // console.log(response.data.slip.advice);
+        setadvice(response.data.slip.advice)
+      })
+      .catch((error)=>{
+        console.log(error);
+      });
+      // console.log(adviceResult.data);
+    // const {advice} = adviceResult.data
+    // setadvice(advice)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="card">
+        <h1>{advice}</h1>
+        <button onClick={fetchAdvice}>Give Advice</button>
+      </div>
     </div>
   );
 }
