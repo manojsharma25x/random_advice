@@ -3,7 +3,7 @@ import './App.css';
 import { useEffect, useState } from "react";
 
 function App() {
-const [advice, setadvice] = useState("Sometimes it's best to ignore other people's advice.")
+const [advice, setadvice] = useState("Loading...")
   useEffect(() => {
     fetchAdvice();
   }, [])
