@@ -9,7 +9,7 @@ const [advice, setadvice] = useState("Loading...")
   }, [])
   
   const fetchAdvice = ()=>{
-    const adviceResult = axios.get("https://api.adviceslip.com/advice")
+    axios.get("https://api.adviceslip.com/advice")
       .then((response)=>{
         // console.log(response.data.slip.advice);
         setadvice(response.data.slip.advice)
